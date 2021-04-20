@@ -15,7 +15,7 @@ let result, expected;
             }
          }, 
          typeCheck: function(expected) {
-            if(typeof a !== expected || typeof b !== expected) {
+            if(typeof result !== expected) {
                 throw new Error(`typeof the arguments is not a number`);
               }
          },
@@ -24,20 +24,20 @@ let result, expected;
  }
 function test(message, callback) {
     try{
-        callback(5, 4);
+        callback();
         console.log("✔️", message);
     }catch(error) {
         console.error(error);
         console.log("❎", message);
     }
 }
-function checkingType(a, b) {
-    result = add(a, b);
+function checkingAddType() {
+    result = add(10, "abc");
     expected = "number";
-   expect(add(a, b)).typeCheck(expected);
+   expect(result).typeCheck(expected);
 }
 
-test("Checking the arguments type", checkingType);
+test("Checking the arguments type of adding two numbers", checkingAddType);
 
 function addTwo() {
     result = add(30, 20);
@@ -47,10 +47,18 @@ function addTwo() {
 
 test("Adding two numbers", addTwo);
 
-function muliplyTwo() {
-    result = muliplyTwo(10, 20);
+function multiplyTwo() {
+    result = multiply(10, 20);
     expected = 100;
     expect(result).toEqual(expected);
 }
 
-test("Multiply two numbers", muliplyTwo);
+test("Multiply two numbers", multiplyTwo);
+
+function checkingMultiplyType() {
+    result = multiply(10,"abc");
+    expected = "number";
+   expect(result).typeCheck(expected);
+}
+
+test("Checking the arguments type of multiplying two numbers", checkingMultiplyType);
