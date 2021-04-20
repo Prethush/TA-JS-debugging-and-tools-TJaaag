@@ -1,11 +1,25 @@
+
+// Basic functions
+
 function add(numA, numB) {
+    if(typeof numA === "number" && typeof numB === "number") {
     return numA + numB;
+    } else {
+        return `Not a number`;
+    }
 }
 
 function multiply(numA, numB) {
-    return numA * numB;
+    if(typeof numA === "number" && typeof numB === "number") {
+        return numA * numB;
+        } else {
+            return `Not a number`;
+        }
 }
 let result, expected;
+
+
+//Assertion Library
 
  function expect(actual) {
      return {
@@ -22,6 +36,9 @@ let result, expected;
 
      }
  }
+
+ //Testing Framework
+
 function test(message, callback) {
     try{
         callback();
@@ -31,8 +48,14 @@ function test(message, callback) {
         console.log("❎", message);
     }
 }
+
+
+//Tests
+
+//Addition functions
+
 function checkingAddType() {
-    result = add(10, "abc");
+    result = add(10, 10);
     expected = "number";
    expect(result).typeCheck(expected);
 }
@@ -46,6 +69,18 @@ function addTwo() {
 }
 
 test("Adding two numbers", addTwo);
+
+
+test("Adding 10 + 40 to be equal to 50", () => {
+    expect(add(10, 40)).toEqual(50);
+});
+
+test("Adding 20 + 20 to be equal to 100", () => {
+    expect(add(20, 20)).toEqual(100);
+});
+
+
+//Muliplication functions
 
 function multiplyTwo() {
     result = multiply(10, 20);
@@ -62,3 +97,11 @@ function checkingMultiplyType() {
 }
 
 test("Checking the arguments type of multiplying two numbers", checkingMultiplyType);
+
+test("multiplying 20 * 20 to be equal to 400", () => {
+     expect(multiply(20, 20)).toEqual(400);
+});
+
+test("multiplying 10 * 20 to be eaual to 100", () => {
+    expect(multiply(10, 20)).toEqual(100);
+});
